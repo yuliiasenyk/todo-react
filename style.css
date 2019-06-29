@@ -1,0 +1,65 @@
+html,
+body {
+    height: 100%;
+    color: rgb(255, 255, 255);
+    background: linear-gradient(to top, #2571d4bb, #36bcf1d7);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+h1 {
+    margin: 20px 0 15px 0;
+}
+
+#main {
+    width: 600px;
+    margin: auto;
+    text-align: left;
+}
+
+ul {
+    list-style: none;
+}
+
+ul > li:hover {
+    background-color: rgb(228, 224, 224);
+}
+
+.form-inline .form-control {
+    width: 50%;
+    height: 40px;
+    margin-left: 20%;
+}
+
+.done {
+    color: rgb(0, 141, 19);
+    text-decoration: line-through;
+}
+
+.undone {
+    color: rgb(0, 89, 114);
+}
+
+.icon {
+    margin: 0px 0px 10px 0;
+}
+
+.name-form {
+    color: violet;
+    position: relative;
+    top: 10px;
+    left: 60%;
+}
+
+.name-input {
+    width: 200px;
+}
+
+.symbol {
+    font-weight: 400;
+    color
+}
+
+.close {
+    font-weight: 400;
+}
