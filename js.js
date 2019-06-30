@@ -10,22 +10,23 @@ class TodoHeader extends React.Component {
     this.handleSubmit = this.handleSubmit;
     }
     
-    updateInput = (event) => {
+    updateInput = (event) => { 
     this.setState({username : event.target.value})
-    }  
+    }; 
     
     handleSubmit = () => {
       event.preventDefault();
     }
    
     render(){
-    return ( <div>
+    return ( 
+    <React.Fragment>
         <form className="name-form" onSubmit={this.handleSubmit}>
         <input type="text" onChange={this.updateInput} className="form-control" className="name-input"></input>
         <input type="submit" className="btn btn-default"></input>
         </form> 
         <h1 className="">Hello {this.state.username}! You have {todoItems.length} tasks to do!</h1>
-</div>
+</React.Fragment>
       );
     }
 
