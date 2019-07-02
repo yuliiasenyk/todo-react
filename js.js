@@ -3,34 +3,30 @@ todoItems.push({index: 1, value: "learn react", done: false});
 todoItems.push({index: 1, value: "learn smth else", done: true});
 
 class TodoHeader extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = { username : ''}
-    this.updateInput = this.updateInput;
-    this.handleSubmit = this.handleSubmit;
-    }
-    
-    updateInput = (event) => { 
-    this.setState({username : event.target.value})
-    }; 
-    
-    handleSubmit = () => {
-      event.preventDefault();
-    }
-   
-    render(){
-    return ( 
-    <React.Fragment>
-        <form className="name-form" onSubmit={this.handleSubmit}>
-        <input type="text" onChange={this.updateInput} className="form-control" className="name-input"></input>
-        <input type="submit" className="btn btn-default"></input>
-        </form> 
-        <h1 className="">Hello {this.state.username}! You have {todoItems.length} tasks to do!</h1>
-</React.Fragment>
-      );
-    }
+    this.state = {value: ''};
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({ value: this.element.value });
+    let greeting;
+  }
 
-
+  render() {
+    return (
+      <React.Fragment>
+      <form onSubmit={this.handleSubmit} className="name-form">
+        <label>
+          <input type="text" ref={el => this.element = el} lassName="form-control" className="name-input" />
+        </label>
+        <input type="submit" value="Submit" className="btn btn-default" />
+      </form>
+      <h1> Hello, {this.state.value}! <br/> You have {todoItems.length} tasks to do!</h1>
+      </React.Fragment>
+    );
+  }
 }
 
 class TodoList extends React.Component {
