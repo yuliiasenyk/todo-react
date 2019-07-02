@@ -16,6 +16,8 @@ class TodoHeader extends React.Component {
   }
 
   render() {
+    let greeting = `Hi, ${this.state.value}!`;
+    if (!this.state.value) {greeting = 'Hello!'}
     return (
       <React.Fragment>
       <form onSubmit={this.handleSubmit} className="name-form" ref={(ref) => this.formRef = ref}>
@@ -24,7 +26,7 @@ class TodoHeader extends React.Component {
         </label>
         <input type="submit" value="Submit" className="btn btn-default" />
       </form>
-      <h1> Hello, {this.state.value}! </h1>
+      <h1> {greeting} </h1>
       <h2>You have {todoItems.length} tasks to do!</h2>
       </React.Fragment>
     );
