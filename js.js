@@ -6,24 +6,26 @@ class TodoHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.formRef = null;
   }
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.setState({ value: this.element.value });
     let greeting;
+    this.formRef.reset();
   }
 
   render() {
     return (
       <React.Fragment>
-      <form onSubmit={this.handleSubmit} className="name-form">
+      <form onSubmit={this.handleSubmit} className="name-form" ref={(ref) => this.formRef = ref}>
         <label>
           <input type="text" ref={el => this.element = el} lassName="form-control" className="name-input" />
         </label>
         <input type="submit" value="Submit" className="btn btn-default" />
       </form>
-      <h1> Hello, {this.state.value}! <br/> You have {todoItems.length} tasks to do!</h1>
+      <h1> Hello, {this.state.value}! </h1>
+      <h2>You have {todoItems.length} tasks to do!</h2>
       </React.Fragment>
     );
   }
