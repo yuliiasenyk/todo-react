@@ -1,5 +1,6 @@
 var todoItems = [];
-todoItems.push({index: 1, value: "learn smth", done: false});
+todoItems.push({index: 1, value: "do smth", done: false});
+todoItems.push({index: 2, value: "do smth else", done: false});
 var doneItems =[];
 
 class TodoHeader extends React.Component {
@@ -24,7 +25,7 @@ class TodoHeader extends React.Component {
       <React.Fragment>
       <form onSubmit={this.handleSubmit} className="name-form" ref={(ref) => this.formRef = ref}>
         <label>
-          <input type="text" ref={el => this.element = el} lassName="form-control" className="name-input" />
+          <input type="text" ref={el => this.element = el} lassName="form-control" className="name-input" placeholder="your name.."/>
         </label>
         <input type="submit" value="Submit" className="btn btn-default" />
       </form>
