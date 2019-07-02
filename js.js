@@ -1,6 +1,6 @@
 var todoItems = [];
-todoItems.push({index: 1, value: "learn react", done: false});
-todoItems.push({index: 1, value: "learn smth else", done: true});
+todoItems.push({index: 1, value: "learn smth", done: false});
+var doneItems =[];
 
 class TodoHeader extends React.Component {
   constructor(props) {
@@ -11,14 +11,16 @@ class TodoHeader extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({ value: this.element.value });
-    let greeting;
     this.formRef.reset();
   }
 
   render() {
     let greeting = `Hi, ${this.state.value}!`;
     if (!this.state.value) {greeting = 'Hello!'}
-    return (
+    let yourTasksGreeting1 = `Number of tasks: ${todoItems.length}`;
+    let yourTasksGreeting2 = `Completed: ${doneItems.length}`;
+    if (todoItems.length === 0) {yourTasksGreeting1 = "You have no tasks!"; yourTasksGreeting2 = ""}
+        return (
       <React.Fragment>
       <form onSubmit={this.handleSubmit} className="name-form" ref={(ref) => this.formRef = ref}>
         <label>
@@ -27,7 +29,7 @@ class TodoHeader extends React.Component {
         <input type="submit" value="Submit" className="btn btn-default" />
       </form>
       <h1> {greeting} </h1>
-      <h2>You have {todoItems.length} tasks to do!</h2>
+      <h2>{yourTasksGreeting1} <br/> {yourTasksGreeting2}</h2>
       </React.Fragment>
     );
   }
@@ -113,6 +115,7 @@ class TodoApp extends React.Component {
     this.setState({todoItems: todoItems});
   }
   removeItem = (itemIndex) => {
+    doneItems.splice(itemIndex, 1);
     todoItems.splice(itemIndex, 1);
     this.setState({todoItems: todoItems});
   }
@@ -120,7 +123,13 @@ class TodoApp extends React.Component {
     var todo = todoItems[itemIndex];
     todoItems.splice(itemIndex, 1);
     todo.done = !todo.done;
-    todo.done ? todoItems.push(todo) : todoItems.unshift(todo);
+    if (todo.done) {
+      todoItems.push(todo);
+      doneItems.push(todo);
+    }else {
+      todoItems.unshift(todo)
+    doneItems.pop(todo);
+    };
     this.setState({todoItems: todoItems});  
   }
   render() {
