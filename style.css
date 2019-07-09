@@ -11,6 +11,13 @@ h1 {
     margin: 20px 0 15px 0;
 }
 
+.clock {
+    position: fixed;
+    right: 10px;
+    bottom: 30px;
+    font-size:1em;
+}
+
 #main {
     width: 600px;
     margin: auto;

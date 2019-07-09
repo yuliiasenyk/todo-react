@@ -6,26 +6,36 @@ var doneItems =[];
 class TodoHeader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
-    this.formRef = null;
-  }
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.setState({ value: this.element.value });
-    this.formRef.reset();
+    this.state = {
+      input: '',
+      submit: ''
+    };
   }
 
+  handleChange = (event) => {
+    this.setState({
+      input: event.target.value
+    });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      input: '',
+      submit: this.state.input
+    });  }
+
   render() {
-    let greeting = `Hi, ${this.state.value}!`;
-    if (!this.state.value) {greeting = 'Hello!'}
+    let greeting = `Hi, ${this.state.submit}!`;
+    if (!this.state.submit) {greeting = 'Hello!'}
     let yourTasksGreeting1 = `Number of tasks: ${todoItems.length}`;
     let yourTasksGreeting2 = `Completed: ${doneItems.length}`;
     if (todoItems.length === 0) {yourTasksGreeting1 = "You have no tasks!"; yourTasksGreeting2 = ""}
         return (
       <React.Fragment>
-      <form onSubmit={this.handleSubmit} className="name-form" ref={(ref) => this.formRef = ref}>
+      <form onSubmit={this.handleSubmit} className="name-form">
         <label>
-          <input type="text" ref={el => this.element = el} lassName="form-control" className="name-input" placeholder="your name.."/>
+          <input value = {this.state.input} onChange = {this.handleChange.bind(this)} className="form-control" className="name-input" placeholder="your name.."/>
         </label>
         <input type="submit" value="Submit" className="btn btn-default" />
       </form>
@@ -136,6 +146,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <div id="main">
+          <Clock />
         <TodoHeader />
         <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone}/>
         <TodoForm addItem={this.addItem} />
@@ -143,6 +154,41 @@ class TodoApp extends React.Component {
     );
   }
 }
+
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h2 className="clock">It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+
 
 
 
