@@ -89,23 +89,34 @@ class TodoListItem extends React.Component {
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      taskInput: '',
+      taskSubmit: ''
+    };
   }
-  componentDidMount() {
-    this.refs.itemName.focus();
+
+  handleChange = (event) => {
+    this.setState({
+      taskInput: event.target.value
+    });
   }
+
   onSubmit = (event) => {
     event.preventDefault();
-    var newItemValue = this.refs.itemName.value;
-    
-    if(newItemValue) {
-      this.props.addItem({newItemValue});
-      this.refs.form.reset();
-    }
+    this.setState((state, props) => ({
+      taskInput: '',
+      taskSubmit: state.taskInput
+    }), () => {
+  var newItemValue = this.state.taskSubmit;
+if (newItemValue) {
+    this.props.addItem({newItemValue})
   }
+  });
+}
   render () {
     return (
-      <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-        <input type="text" ref="itemName" className="form-control" placeholder="add a new todo..."/>
+      <form  onSubmit={this.onSubmit} className="form-inline">
+        <input value = {this.state.taskInput} onChange = {this.handleChange} type="text"  className="form-control" placeholder="add a new todo..."/>
         <button type="submit" className="btn btn-default">Add</button> 
       </form>
     );   
@@ -187,12 +198,5 @@ class Clock extends React.Component {
     );
   }
 }
-
-
-
-
-
-
-
 
 ReactDOM.render(<TodoApp initItems={todoItems}/>, document.getElementById('root'));
