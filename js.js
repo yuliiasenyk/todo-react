@@ -1,3 +1,5 @@
+// import { Clock } from 'Clock';
+
 var todoItems = [];
 todoItems.push({index: 1, value: "do smth", done: false});
 todoItems.push({index: 2, value: "do smth else", done: false});
@@ -165,8 +167,6 @@ class TodoApp extends React.Component {
     );
   }
 }
-
-
 class Clock extends React.Component {
   constructor(props) {
     super(props);
@@ -193,10 +193,12 @@ class Clock extends React.Component {
   render() {
     return (
       <div>
-        <h2 className="clock">It is {this.state.date.toLocaleTimeString()}.</h2>
+        <h2 className="clock">{this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
   }
 }
+
+
 
 ReactDOM.render(<TodoApp initItems={todoItems}/>, document.getElementById('root'));
